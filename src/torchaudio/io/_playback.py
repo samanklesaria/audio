@@ -1,6 +1,7 @@
 import warnings
 from sys import platform
 from typing import Optional
+from torchaudio._internal.module_utils import dropping_support
 
 import torch
 import torchaudio
@@ -15,6 +16,7 @@ dict_format = {
 }
 
 
+@dropping_support
 def play_audio(
     waveform: torch.Tensor,
     sample_rate: Optional[float],

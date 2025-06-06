@@ -10,6 +10,9 @@ from torchaudio._internal import module_utils as _mod_utils
 if _mod_utils.is_module_available("numpy"):
     import numpy as np
 
+from torchaudio._internal.module_utils import dropping_support
+
+
 
 __all__ = [
     "read_vec_int_ark",
@@ -41,6 +44,7 @@ def _convert_method_output_to_tensor(
         yield key, torch.from_numpy(np_arr)
 
 
+@dropping_support
 @_mod_utils.requires_module("kaldi_io", "numpy")
 def read_vec_int_ark(file_or_fd: Any) -> Iterable[Tuple[str, Tensor]]:
     r"""Create generator of (key,vector<int>) tuples, which reads from the ark file/stream.
@@ -64,6 +68,7 @@ def read_vec_int_ark(file_or_fd: Any) -> Iterable[Tuple[str, Tensor]]:
     return _convert_method_output_to_tensor(file_or_fd, kaldi_io.read_vec_int_ark, convert_contiguous=True)
 
 
+@dropping_support
 @_mod_utils.requires_module("kaldi_io", "numpy")
 def read_vec_flt_scp(file_or_fd: Any) -> Iterable[Tuple[str, Tensor]]:
     r"""Create generator of (key,vector<float32/float64>) tuples, read according to Kaldi scp.
@@ -84,6 +89,7 @@ def read_vec_flt_scp(file_or_fd: Any) -> Iterable[Tuple[str, Tensor]]:
     return _convert_method_output_to_tensor(file_or_fd, kaldi_io.read_vec_flt_scp)
 
 
+@dropping_support
 @_mod_utils.requires_module("kaldi_io", "numpy")
 def read_vec_flt_ark(file_or_fd: Any) -> Iterable[Tuple[str, Tensor]]:
     r"""Create generator of (key,vector<float32/float64>) tuples, which reads from the ark file/stream.
@@ -104,6 +110,7 @@ def read_vec_flt_ark(file_or_fd: Any) -> Iterable[Tuple[str, Tensor]]:
     return _convert_method_output_to_tensor(file_or_fd, kaldi_io.read_vec_flt_ark)
 
 
+@dropping_support
 @_mod_utils.requires_module("kaldi_io", "numpy")
 def read_mat_scp(file_or_fd: Any) -> Iterable[Tuple[str, Tensor]]:
     r"""Create generator of (key,matrix<float32/float64>) tuples, read according to Kaldi scp.
@@ -124,6 +131,7 @@ def read_mat_scp(file_or_fd: Any) -> Iterable[Tuple[str, Tensor]]:
     return _convert_method_output_to_tensor(file_or_fd, kaldi_io.read_mat_scp)
 
 
+@dropping_support
 @_mod_utils.requires_module("kaldi_io", "numpy")
 def read_mat_ark(file_or_fd: Any) -> Iterable[Tuple[str, Tensor]]:
     r"""Create generator of (key,matrix<float32/float64>) tuples, which reads from the ark file/stream.

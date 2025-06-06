@@ -7,6 +7,8 @@ from torch import Tensor
 from torio.io._streaming_media_decoder import _get_afilter_desc, StreamingMediaDecoder as StreamReader
 from torio.io._streaming_media_encoder import CodecConfig, StreamingMediaEncoder as StreamWriter
 
+from torchaudio._internal.module_utils import dropping_support
+
 
 class _StreamingIOBuffer:
     """Streaming Bytes IO buffer. Data are dropped when read."""
@@ -237,6 +239,7 @@ class AudioEffector:
         >>> AudioEffector(format="mp3", codec_config=CodecConfig(bit_rate=32_000))
     """
 
+    @dropping_support
     def __init__(
         self,
         effect: Optional[str] = None,

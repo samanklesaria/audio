@@ -16,6 +16,7 @@ from .ffmpeg import FFmpegBackend
 from .soundfile import SoundfileBackend
 from .sox import SoXBackend
 
+from torchaudio._internal.module_utils import dropping_support
 
 @lru_cache(None)
 def get_available_backends() -> Dict[str, Type[Backend]]:
@@ -115,6 +116,7 @@ def get_load_func():
                 return backend
         raise RuntimeError(f"Couldn't find appropriate backend to handle uri {uri} and format {format}.")
 
+    @dropping_support
     def load(
         uri: Union[BinaryIO, str, os.PathLike],
         frame_offset: int = 0,
@@ -221,6 +223,8 @@ def get_save_func():
                 return backend
         raise RuntimeError(f"Couldn't find appropriate backend to handle uri {uri} and format {format}.")
 
+
+    @dropping_support
     def save(
         uri: Union[BinaryIO, str, os.PathLike],
         src: torch.Tensor,

@@ -3,6 +3,7 @@ from __future__ import annotations
 import math
 
 from typing import List, NamedTuple, Union
+from torchaudio._internal.module_utils import dropping_support
 
 import torch
 import torchaudio
@@ -154,6 +155,7 @@ class CUCTCDecoder:
         return hypos
 
 
+@dropping_support
 def cuda_ctc_decoder(
     tokens: Union[str, List[str]],
     nbest: int = 1,

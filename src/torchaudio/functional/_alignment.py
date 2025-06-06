@@ -4,10 +4,13 @@ from typing import List, Optional, Tuple
 import torch
 from torch import Tensor
 from torchaudio._extension import fail_if_no_align
+from torchaudio._internal.module_utils import dropping_support
+
 
 __all__ = []
 
 
+@dropping_support
 @fail_if_no_align
 def forced_align(
     log_probs: Tensor,
